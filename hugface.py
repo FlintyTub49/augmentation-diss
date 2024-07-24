@@ -1,4 +1,6 @@
 import random
+from copy import deepcopy
+
 import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -39,6 +41,27 @@ def generate_completions(triples, num_completion):
     
     return selected_completions
 
+def generate_new_triples(triples):
+    '''Generate new artificial triples from the KG
+    Args:
+        triples: a list of triples from the original KG
+    Returns:
+        triples: the artificially generated triples
+    '''
+    predicate = [trip[1] for trip in triples]
+    object = [trip[2] for trip in triples]
+
+    # Shuffle each of them
+    random.shuffle(predicate)
+    random.shuffle(object)
+
+    # Recreate artificial triples
+    for i, trip in enumerate(triples):
+        trip[1] = predicate[i]
+        trip[2] = object[i]
+        
+    return triples
+
 def compute_likelihood(prompt, completions, batch_size=5):
     '''
     Compute the likelihood of a list of continuations for a particular subject
@@ -50,7 +73,6 @@ def compute_likelihood(prompt, completions, batch_size=5):
     Returns:
         likelihood: the likelihood for each continuation for the subject
     '''
-
     # Tokenize the prompt
     prompt_tokens = tokenizer.encode(prompt, return_tensors='pt').to(device)
 
@@ -77,7 +99,7 @@ def compute_likelihood(prompt, completions, batch_size=5):
         print(input_tokens.size())
         
         # Get model outputs and calculate the loss (negative log-likelihood)
-        with torch.no_grad():
+        with torch.inference_mode():
             outputs = model(input_tokens, labels=input_tokens)
         losses = outputs.loss
         batch_likelihoods = -losses.cpu().numpy()
@@ -95,10 +117,37 @@ def compute_likelihood(prompt, completions, batch_size=5):
     #     input_tokens = torch.cat((prompt_tokens, completion_tokens), dim=1).to(device)
 
     #     # Get model outputs and calculate the loss (negative log-likelihood)
-    #     with torch.no_grad():
+    #     with torch.inference_mode():
     #         outputs = model(input_tokens, labels=input_tokens)
     #     loss = outputs.loss.item()
     #     likelihoods.append(-loss)
+
+    return likelihoods
+
+def compute_likelihood_icl(prompt, completions, batch_size=5):
+    '''
+    Compute the likelihood of a list of continuations for a particular subject
+    Args:
+        prompt: the subject for which to compute the likelihood
+        completions: a list of possible completions which need to be scored
+        model_name: the name of the model to be used
+        batch_size: batch size for the computation
+    Returns:
+        likelihood: the likelihood for each continuation for the subject
+    '''
+    # Iterate over completions
+    likelihoods = []
+    # -------------------------------- Online ------------------------------- #
+    for completion in completions:
+        # Combine the prompt and the completion to create the model input
+        model_input = prompt + completion
+        input_tokens = tokenizer.encode(model_input, return_tensors='pt').to(device)
+
+        # Get model outputs and calculate the loss (negative log-likelihood)
+        with torch.inference_mode():
+            outputs = model(input_tokens, labels=input_tokens)
+        loss = outputs.loss.item()
+        likelihoods.append(-loss)
 
     return likelihoods
 
@@ -116,14 +165,28 @@ def main():
 
     # Read the triples and generate the possible completions for each subject
     triples = read_triples(file_path)
-    selected_completions = generate_completions(triples, num_completions)
-    # print(selected_completions)
 
-    # Compute the possible likelihood for each subject and continuation
-    for subject, completions in selected_completions.items():
-        likelihoods = compute_likelihood(subject, completions)
-        for i, likelihood in enumerate(likelihoods):
-            print(f"> {subject} | {completions[i]} : {likelihood:.4f}") #TODO: Save maximum likelihood continuation instead of printing all
+    # ------------------ Scoring Each Possible Continuation ----------------- #
+    # selected_completions = generate_completions(triples, num_completions)
+    # for subject, completions in selected_completions.items():
+    #     likelihoods = compute_likelihood(subject, completions)
+    #     for i, likelihood in enumerate(likelihoods):
+    #         print(f"> {subject} | {completions[i]} : {likelihood:.4f}")
+            
+    # ------------------------- In-context Learning ------------------------- #
+    # Select random number of triples to serve as context
+    joined = [' '.join(i) for i in triples]
+    joined = random.sample(joined, 30)
+    prompt = '\n'.join(joined)
+    
+    # Shuffle the available triples and send them as completions
+    completions = generate_new_triples(deepcopy(triples))
+    completions = [' '.join(i) for i in completions]
+    likelihoods = compute_likelihood_icl(prompt, completions)
+    
+    for i, likelihood in enumerate(likelihoods):
+        print(f">{completions[i]} : {likelihood:.4f}")
+    
 
 if __name__ == "__main__":
     # Making sure code runs on GPU
