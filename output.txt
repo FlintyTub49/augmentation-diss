@@ -1,0 +1,19 @@
+Grammy Award for Best Rock Song	/award/award_category/winners./award/award_honor/award_winner	Aerosmith
+Cincinnati Reds	/sports/sports_team/roster./baseball/baseball_roster_position/position	catcher
+University of North Texas	/education/educational_institution/students_graduates./education/education/student	Tommy Tune
+Valve Corporation	/business/business_operation/industry	video game
+Stephen Colbert	/base/popstra/celebrity/friendship./base/popstra/friendship/participant	James Corden
+Anjelica Huston	/people/person/place_of_birth	Santa Monica
+Russell Crowe	/film/actor/film./film/performance/film	A Beautiful Mind
+Insidious	/film/film/release_date_s./film/film_regional_release_date/film_release_region	United States of America
+Roger Deakins	/award/award_winner/awards_won./award/award_honor/award_winner	Skyfall
+Roger Deakins	/film/cinematographer/film	Rocky V
+Miramax	/film/film_distributor/films_distributed./film/film_film_distributor_relationship/film	The Cider House Rules
+Miramax	/film/film_production_company/film_production_company_relationship/film	A Beautiful Mind
+John Lee Hooker	/people/person/profession	singer-songwriter
+Burt Young	/film/actor/film./film/performance/film	Rocky V
+Burt Young	/sports/boxer/boxing_match	Carl Weathers
+Ray Walston	/people/deceased_person/place_of_death	Beverly Hills
+Ray Walston	/tv/television_actor/tv_show	The Dick Van Dyke Show
+ACF Fiorentina	/soccer/football_team/current_roster./sports/sports_team_roster/position	goalkeeper
+ACF Fiorentina	/soccer/football_player/player_position/goalie	Roberto Baronio

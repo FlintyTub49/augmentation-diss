@@ -1,0 +1,2 @@
+Following are some triples from a knowledge graph separated by a tab. Generate new similar triples to it on the basis of the triples provided to you. You cannot make new entities or relationships. The triples should be factually correct based on the infromation available in the existing triples.
+Each triple should be on a new line.

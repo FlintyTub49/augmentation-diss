@@ -1,0 +1,15 @@
+/m/02wh75	/award/award_category/winners./award/award_honor/award_winner	/m/0134pk
+/m/01ypc	/sports/sports_team/roster./baseball/baseball_roster_position/position	/m/028c_8
+/m/0dwl2	/business/business_operation/industry	/m/01mw1
+/m/01j5ts	/people/person/place_of_birth	/m/06_kh
+/m/06dv3	/film/actor/film./film/performance/film	/m/09m6kg
+/m/0c3ybss	/film/film/release_date_s./film/film_regional_release_date/film_release_region	/m/09c7w0
+/m/04qvl7	/award/award_winner/awards_won./award/award_honor/award_winner	/m/02vxq9m
+/m/04qvl7	/film/cinematographer/film	/m/0140g4
+/m/0jz9f	/film/film_distributor/films_distributed./film/film_film_distributor_relationship/film	/m/083shs
+/m/0jz9f	/film/film_production_company/film_production_company_relationship/film	/m/09m6kg
+/m/0411q	/people/person/profession	/m/016z4k
+/m/04yywz	/film/actor/film./film/performance/film	/m/0140g4
+/m/04yywz	/sports/boxer/boxing_match	/m/0234pg
+/m/01k7d9	/people/deceased_person/place_of_death	/m/0k049
+/m/01453	/soccer/football_team/current_roster./sports/sports_team_roster/position	/m/0dgrmp

@@ -1,0 +1,75 @@
+Dominican Republic	/location/country/form_of_government	republic
+Mighty Morphin Power Rangers	/tv/tv_program/regular_cast./tv/regular_tv_appearance/actor	Wendee Lee
+Michelle Rodriguez	/award/award_winner/awards_won./award/award_honor/award_winner	Naveen Andrews
+Australia national association football team	/soccer/football_team/current_roster./sports/sports_team_roster/position	midfielder
+Maldives national football team	/soccer/football_team/current_roster./soccer/football_roster_position/position	forward
+Bryan Singer	/film/actor/film./film/performance/film	Star Trek: Nemesis
+BAFTA Award for Best Original Screenplay	/award/award_category/nominees./award/award_nomination/nominated_for	Philadelphia
+Danny DeVito	/award/award_nominee/award_nominations./award/award_nomination/award_nominee	Guy Pearce
+Academy Award for Best Foreign Language Film	/award/award_category/winners./award/award_honor/ceremony	61st Academy Awards
+Anonymous	/film/film/release_date_s./film/film_regional_release_date/film_release_distribution_medium	DVD
+City of Angels	/award/award_winning_work/awards_won./award/award_honor/award_winner	Gabriel Yared
+Bridesmaids	/film/film/release_date_s./film/film_regional_release_date/film_release_region	Portugal
+Serpico	/film/film/language	Italian
+Catherine Keener	/award/award_nominee/award_nominations./award/award_nomination/award_nominee	Chris Cooper
+United States of America	/location/location/contains	St. Augustine
+Stan Lee	/film/actor/film./film/performance/film	X-Men
+Chiwetel Ejiofor	/award/award_nominee/award_nominations./award/award_nomination/award_nominee	Carla Gugino
+Golden Raspberry Award for Worst Supporting Actor	/award/award_category/nominees./award/award_nomination/nominated_for	G.I. Joe: The Rise of Cobra
+Oprah Winfrey	/people/person/profession	theatrical producer
+Washington, D.C.	/location/statistical_region/religions./location/religion_percentage/religion	Christianity
+Saeed Jaffrey	/award/award_nominee/award_nominations./award/award_nomination/award	BAFTA Award for Best Actor in a Supporting Role
+Hunter S. Thompson	/influence/influence_node/influenced_by	William Faulkner
+Yale University	/education/educational_institution/students_graduates./education/education/student	James Franco
+Frankenweenie	/film/film/release_date_s./film/film_regional_release_date/film_release_region	Portugal
+Alan Burnett	/people/person/place_of_birth	United States of America
+Bill Payne	/people/person/profession	record producer
+Fantastic Four: Rise of the Silver Surfer	/film/film/other_crew./film/film_crew_gig/film_crew_role	make-up artist
+52nd Annual Grammy Awards	/award/award_ceremony/awards_presented./award/award_honor/award_winner	Dr. Dre
+American Reunion	/film/film/release_date_s./film/film_regional_release_date/film_release_region	Argentina
+BAFTA Award for Best Makeup and Hair	/award/award_category/nominees./award/award_nomination/nominated_for	Shakespeare in Love
+The Love Guru	/film/film/country	United States of America
+Jackie Chan	/film/actor/film./film/performance/film	Around the World in 80 Days
+triathlon	/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country	Mexico
+Wall Street	/award/award_winning_work/awards_won./award/award_honor/award	Golden Raspberry Award for Worst Supporting Actress
+Top Gun	/film/film/country	United States of America
+Rosemary Harris	/award/award_nominee/award_nominations./award/award_nomination/award_nominee	Philip Seymour Hoffman
+Dave Brubeck	/award/award_nominee/award_nominations./award/award_nomination/award	Grammy Award for Best Classical Crossover Album
+The Dresser	/film/film/genre	historical period drama
+Scott Rudin	/award/award_winner/awards_won./award/award_honor/award_winner	Alan Bennett
+Miramax	/film/film_distributor/films_distributed./film/film_film_distributor_relationship/film	The Cider House Rules
+eventing	/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country	Belgium
+Oregon Ducks football	/sports/sports_team/roster./american_football/football_historical_roster_position/position_s	running back
+prime minister	/government/government_office_category/officeholders./government/government_position_held/jurisdiction_of_office	Dominica
+Roger Deakins	/award/award_nominee/award_nominations./award/award_nomination/nominated_for	Skyfall
+Burt Young	/film/actor/film./film/performance/film	Rocky V
+Ray Walston	/people/deceased_person/place_of_death	Beverly Hills
+Don Cheadle	/award/award_winner/awards_won./award/award_honor/award_winner	Larenz Tate
+John Barrowman	/film/actor/film./film/performance/film	The Untouchables
+Cabaret	/award/award_winning_work/awards_won./award/award_honor/award	BAFTA Award for Best Film
+Richard Day	/award/award_nominee/award_nominations./award/award_nomination/award_nominee	Thomas Little
+Yale University	/education/educational_institution/students_graduates./education/education/student	James Burrows
+ACF Fiorentina	/soccer/football_team/current_roster./sports/sports_team_roster/position	goalkeeper
+Once Upon a Time in America	/film/film/country	Italy
+David Healy	/sports/pro_athlete/teams./sports/sports_team_roster/team	Doncaster Rovers
+University of North Texas	/education/educational_institution/students_graduates./education/education/student	Norah Jones
+Treasure Planet	/film/film/release_date_s./film/film_regional_release_date/film_release_distribution_medium	DVD
+John Lee Hooker	/people/person/profession	singer-songwriter
+Freddy Rodriguez	/award/award_winner/awards_won./award/award_honor/award_winner	Justina Machado
+Rango	/film/film/genre	action film
+Brad Dourif	/people/person/gender	male organism
+internship	/business/job_title/people_with_this_title./business/employment_tenure/company	ESPN
+Stephen Colbert	/base/popstra/celebrity/friendship./base/popstra/friendship/participant	Steve Carell
+My Big Fat Greek Wedding	/film/film/genre	romantic comedy
+Bulworth	/film/film/release_date_s./film/film_regional_release_date/film_release_distribution_medium	DVD
+Anjelica Huston	/people/person/place_of_birth	Santa Monica
+Valve Corporation	/business/business_operation/industry	video game
+Grammy Award for Best Rock Song	/award/award_category/winners./award/award_honor/award_winner	Sting
+Insidious	/film/film/release_date_s./film/film_regional_release_date/film_release_region	United States of America
+Quest for Fire	/film/film/release_date_s./film/film_regional_release_date/film_release_region	Japan
+A Beautiful Mind	/film/film/language	English
+Kaneto Shiozawa	/people/person/nationality	Japan
+3 Idiots	/film/film/genre	comedy film
+Cincinnati Reds	/sports/sports_team/roster./baseball/baseball_roster_position/position	starting pitcher
+Russell Crowe	/film/actor/film./film/performance/film	A Beautiful Mind
+Sarah Lawrence College	/education/educational_institution/students_graduates./education/education/student	Jon Avnet
