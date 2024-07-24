@@ -39,7 +39,7 @@ def generate_completions(triples, num_completion):
     
     return selected_completions
 
-def compute_likelihood(prompt, completions, model_name, batch_size=5):
+def compute_likelihood(prompt, completions, batch_size=5):
     '''
     Compute the likelihood of a list of continuations for a particular subject
     Args:
@@ -50,14 +50,6 @@ def compute_likelihood(prompt, completions, model_name, batch_size=5):
     Returns:
         likelihood: the likelihood for each continuation for the subject
     '''
-    # Making sure code runs on GPU
-    device = 'mps'
-    
-    # Load the pre-trained model and tokenizer
-    model = AutoModelForCausalLM.from_pretrained(model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model.eval()
-    model.to(device)
 
     # Tokenize the prompt
     prompt_tokens = tokenizer.encode(prompt, return_tensors='pt').to(device)
@@ -120,7 +112,6 @@ def main():
     '''
     # Specify all the parameters for the code
     file_path = 'text_files/check.txt'
-    model_name = 'gpt2'
     num_completions = 20
 
     # Read the triples and generate the possible completions for each subject
@@ -130,9 +121,19 @@ def main():
 
     # Compute the possible likelihood for each subject and continuation
     for subject, completions in selected_completions.items():
-        likelihoods = compute_likelihood(subject, completions, model_name)
+        likelihoods = compute_likelihood(subject, completions)
         for i, likelihood in enumerate(likelihoods):
             print(f"> {subject} | {completions[i]} : {likelihood:.4f}") #TODO: Save maximum likelihood continuation instead of printing all
 
 if __name__ == "__main__":
+    # Making sure code runs on GPU
+    device = 'mps'
+    model_name = 'gpt2'
+
+    # Load the pre-trained model and tokenizer
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model.eval()
+    model.to(device)
+    
     main()
