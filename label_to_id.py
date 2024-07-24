@@ -38,10 +38,10 @@ def main(file_path):
             new_triples.append('\t'.join(temp))
         
     # Write the labelled triples to a new text file
-    with open('new_input.txt', 'w') as file:
+    with open('text_files/new_input.txt', 'w') as file:
         file.write('\n'.join(new_triples))
     return
     
 if __name__ == "__main__":
-    file_path = "output.txt"
+    file_path = "text_files/output.txt"
     main(file_path)

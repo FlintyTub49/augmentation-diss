@@ -119,7 +119,7 @@ def main():
         None
     '''
     # Specify all the parameters for the code
-    file_path = 'check.txt'
+    file_path = 'text_files/check.txt'
     model_name = 'gpt2'
     num_completions = 20
 

@@ -115,7 +115,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Setting up simple arguments for the code")
     
     # Add arguments
-    parser.add_argument('-p', '--path', type=str, default='sample.txt', 
+    parser.add_argument('-p', '--path', type=str, default='text_files/sample.txt', 
                         help='Path to the necessary input file')
     parser.add_argument('-m', '--model', type=str, default='QuantFactory/Meta-Llama-3-8B-Instruct-GGUF', 
                         help='Model loaded onto LM Studio')
