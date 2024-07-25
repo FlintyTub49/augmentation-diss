@@ -1,5 +1,6 @@
 import random
 from copy import deepcopy
+from tqdm import tqdm
 
 import torch
 import torch.nn.functional as F
@@ -94,7 +95,7 @@ def main(method = "spe"):
     
     # Iterate over the completions
     likelihoods = []
-    for completion in completions:
+    for completion in tqdm(completions):
         # -------------------- Randomly Sampled KG as Context ------------------- #
         if method == 'ran':
             prompt = triples_to_prompt(triples)
@@ -112,8 +113,9 @@ def main(method = "spe"):
         likelihood = compute_likelihood_icl(prompt, completion)
         likelihoods.append(likelihood)
     
-    for i, likelihood in enumerate(likelihoods):
-        print(f">{completions[i]} : {likelihood:.4f}")
+    with open('text_files/batched_check.txt', 'w') as file:
+        for i, likelihood in enumerate(likelihoods):
+            file.write(f">{completions[i]} : {likelihood:.4f}\n")
     
 
 if __name__ == "__main__":
@@ -128,4 +130,4 @@ if __name__ == "__main__":
     model.eval()
     model.to(device)
     
-    main()
+    main(method)

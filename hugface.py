@@ -1,5 +1,6 @@
 import random
 from copy import deepcopy
+from tqdm import tqdm
 
 import torch
 import torch.nn.functional as F
@@ -137,7 +138,7 @@ def compute_likelihood_icl(prompt, completions, batch_size=5):
     # Iterate over completions
     likelihoods = []
     # -------------------------------- Online ------------------------------- #
-    for completion in completions:
+    for completion in tqdm(completions):
         # Combine the prompt and the completion to create the model input
         model_input = prompt + completion
         input_tokens = tokenizer.encode(model_input, return_tensors='pt').to(device)
@@ -168,7 +169,7 @@ def compute_likelihood_batched(prompt, completions, batch_size = 5):
     
     likelihoods = []
     # -------------- Batchwise calculation of score for triples ------------- #
-    for i in range(0, len(completions), batch_size):
+    for i in tqdm(range(0, len(completions), batch_size)):
         batch_completions = completions[i:i + batch_size]
         
         # Tokenize all the completions in the batch
@@ -179,10 +180,21 @@ def compute_likelihood_batched(prompt, completions, batch_size = 5):
         with torch.inference_mode():
             outputs = model(input_tokens['input_ids'], labels=input_tokens['input_ids'])
         
-        # Collect the likelihoods for the batch
-        batch_losses = outputs.loss.tolist()
-        print(batch_losses)
-        likelihoods.extend([-loss for loss in batch_losses])
+        # Use the logits to find each individual loss
+        logits = outputs.logits
+
+        # Shift the logits and labels so that tokens < n predict n
+        shift_logits = logits[..., :-1, :].contiguous()
+        shift_labels = input_tokens['input_ids'][..., 1:].contiguous()
+
+        # Flatten the tokens
+        loss_fct = torch.nn.CrossEntropyLoss(reduction='none')
+        loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1))
+        loss = loss.view(shift_labels.size())
+        
+        # Compute mean loss per sequence and store negative likelihood
+        batch_losses = loss.mean(dim=1).tolist()
+        likelihoods.extend([-l for l in batch_losses])
 
     return likelihoods
 
@@ -195,7 +207,7 @@ def main():
         None
     '''
     # Specify all the parameters for the code
-    file_path = 'text_files/check.txt'
+    file_path = 'text_files/umls/train.tsv'
     num_completions = 20
 
     # Read the triples and generate the possible completions for each subject
@@ -217,10 +229,11 @@ def main():
     # Shuffle the available triples and send them as completions
     completions = generate_new_triples(deepcopy(triples))
     completions = [' '.join(i) for i in completions]
-    likelihoods = compute_likelihood_icl(prompt, completions)
-    
-    for i, likelihood in enumerate(likelihoods):
-        print(f">{completions[i]} : {likelihood:.4f}")
+    likelihoods = compute_likelihood_batched(prompt, completions)
+        
+    with open('text_files/batched_spe.txt', 'w') as file:
+        for i, likelihood in enumerate(likelihoods):
+            file.write(f">{completions[i]} : {likelihood:.4f}\n")
     
 
 if __name__ == "__main__":
