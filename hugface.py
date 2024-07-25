@@ -226,7 +226,7 @@ def main():
 if __name__ == "__main__":
     # Making sure code runs on GPU
     device = 'mps'
-    model_name = "google/gemma-2b"
+    model_name = "gpt2"
 
     # Load the pre-trained model and tokenizer
     model = AutoModelForCausalLM.from_pretrained(model_name, token=True)
