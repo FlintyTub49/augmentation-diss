@@ -68,7 +68,6 @@ def compute_likelihood(prompt, completions, batch_size=5):
     Args:
         prompt: the subject for which to compute the likelihood
         completions: a list of possible completions which need to be scored
-        model_name: the name of the model to be used
         batch_size: batch size for the computation
     Returns:
         likelihood: the likelihood for each continuation for the subject
@@ -105,7 +104,7 @@ def compute_likelihood(prompt, completions, batch_size=5):
         batch_likelihoods = -losses.cpu().numpy()
         likelihoods.append(batch_likelihoods)
 
-    # ------------------------------ Stochastic ----------------------------- #
+    # -------------------------------- Online ------------------------------- #
     # for completion in completions:
     #     # Tokenize all the completions in the particular batch
     #     completion_tokens = tokenizer.encode(completion, return_tensors='pt').to(device)
@@ -151,6 +150,42 @@ def compute_likelihood_icl(prompt, completions, batch_size=5):
 
     return likelihoods
 
+def compute_likelihood_batched(prompt, completions, batch_size = 5):
+    '''
+    Compute the likelihood of a list of continuations for a particular subject in batches.
+    
+    Args:
+        prompt: the subject for which to compute the likelihood
+        completions: a list of possible completions which need to be scored
+        model_name: the name of the model to be used
+        batch_size: batch size for the computation
+        
+    Returns:
+        likelihoods: a list of likelihoods for each continuation for the subject
+    '''
+    # Setting the padding token
+    tokenizer.pad_token = tokenizer.eos_token
+    
+    likelihoods = []
+    # -------------- Batchwise calculation of score for triples ------------- #
+    for i in range(0, len(completions), batch_size):
+        batch_completions = completions[i:i + batch_size]
+        
+        # Tokenize all the completions in the batch
+        batch_inputs = [prompt + completion for completion in batch_completions]
+        input_tokens = tokenizer(batch_inputs, return_tensors='pt', padding=True).to(device)
+
+        # Get model outputs and calculate the loss (negative log-likelihood)
+        with torch.inference_mode():
+            outputs = model(input_tokens['input_ids'], labels=input_tokens['input_ids'])
+        
+        # Collect the likelihoods for the batch
+        batch_losses = outputs.loss.tolist()
+        print(batch_losses)
+        likelihoods.extend([-loss for loss in batch_losses])
+
+    return likelihoods
+
 def main():
     '''
     Main function to facilitate the running of the code
@@ -191,11 +226,11 @@ def main():
 if __name__ == "__main__":
     # Making sure code runs on GPU
     device = 'mps'
-    model_name = 'gpt2'
+    model_name = "google/gemma-2b"
 
     # Load the pre-trained model and tokenizer
-    model = AutoModelForCausalLM.from_pretrained(model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name, token=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, token=True)
     model.eval()
     model.to(device)
     
