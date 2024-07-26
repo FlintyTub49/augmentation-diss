@@ -207,7 +207,7 @@ def main():
         None
     '''
     # Specify all the parameters for the code
-    file_path = 'text_files/umls/train.tsv'
+    file_path = 'text_files/check.txt'
     num_completions = 20
 
     # Read the triples and generate the possible completions for each subject
@@ -231,7 +231,7 @@ def main():
     completions = [' '.join(i) for i in completions]
     likelihoods = compute_likelihood_batched(prompt, completions)
         
-    with open('text_files/batched_spe.txt', 'w') as file:
+    with open('text_files/batched_check.txt', 'w') as file:
         for i, likelihood in enumerate(likelihoods):
             file.write(f">{completions[i]} : {likelihood:.4f}\n")
     

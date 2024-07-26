@@ -85,7 +85,7 @@ def main(method = "spe"):
         None
     '''
     # Specify all the parameters for the code
-    file_path = 'text_files/umls/train.tsv'
+    file_path = 'text_files/check.txt'
 
     # Read the triples and generate the possible completions for each subject
     triples = read_triples(file_path)
@@ -120,7 +120,7 @@ def main(method = "spe"):
 
 if __name__ == "__main__":
     # Making sure code runs on GPU
-    device = 'cuda'
+    device = 'mps'
     model_name = 'gpt2'
     method = 'spe'
 
