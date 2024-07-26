@@ -120,7 +120,7 @@ def main(method = "spe"):
 
 if __name__ == "__main__":
     # Making sure code runs on GPU
-    device = 'mps'
+    device = 'cuda'
     model_name = 'gpt2'
     method = 'spe'
 
