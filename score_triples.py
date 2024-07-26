@@ -84,8 +84,6 @@ def main(method = "spe"):
     Returns:
         None
     '''
-    # Specify all the parameters for the code
-    file_path = 'text_files/check.txt'
 
     # Read the triples and generate the possible completions for each subject
     triples = read_triples(file_path)
@@ -113,9 +111,17 @@ def main(method = "spe"):
         likelihood = compute_likelihood_icl(prompt, completion)
         likelihoods.append(likelihood)
     
+    # Sort the highest likelihoods
+    likelihoods = sorted(list(zip(completions, likelihoods)), key = lambda x: x[1], reverse=True)
+    likelihoods = likelihoods[:topn]
+    
     with open('text_files/batched_check.txt', 'w') as file:
         for i, likelihood in enumerate(likelihoods):
-            file.write(f">{completions[i]} : {likelihood:.4f}\n")
+            file.write(f"{completions[i]} : {likelihood:.4f}\n")
+    
+    with open('text_files/top_final.tsv', 'w') as file:
+        for i, completions in enumerate(completions):
+            file.write(f"{completions[i].split('\t')}\n")
     
 
 if __name__ == "__main__":
@@ -123,6 +129,8 @@ if __name__ == "__main__":
     device = 'mps'
     model_name = 'gpt2'
     method = 'spe'
+    file_path = 'text_files/check.txt'
+    topn = 999999
 
     # Load the pre-trained model and tokenizer
     model = AutoModelForCausalLM.from_pretrained(model_name, token=True)
