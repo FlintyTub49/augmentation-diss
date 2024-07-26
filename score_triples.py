@@ -111,19 +111,18 @@ def main(method = "spe"):
         likelihood = compute_likelihood_icl(prompt, completion)
         likelihoods.append(likelihood)
     
-    # Sort the highest likelihoods
-    likelihoods = sorted(list(zip(completions, likelihoods)), key = lambda x: x[1], reverse=True)
-    likelihoods = likelihoods[:topn]
+    # Sort the triples with highest likelihoods
+    combined = list(zip(completions, likelihoods))
+    final_sorted = sorted(combined, key = lambda x: x[1], reverse=True)
     
-    with open('text_files/batched_check.txt', 'w') as file:
-        for i, likelihood in enumerate(likelihoods):
-            file.write(f"{completions[i]} : {likelihood:.4f}\n")
+    with open('text_files/regular_new.txt', 'w') as file:
+        for comp, likelihood in final_sorted:
+            file.write(f"{' '.join(comp)} : {likelihood:.4f}\n")
     
-    with open('text_files/top_final.tsv', 'w') as file:
-        for i, completions in enumerate(completions):
-            file.write(f"{completions[i].split('\t')}\n")
+    with open('text_files/regular_final.tsv', 'w') as file:
+        for comp, _ in final_sorted[:topn]:
+            file.write('\t'.join(comp) + '\n')
     
-
 if __name__ == "__main__":
     # Making sure code runs on GPU
     device = 'mps'
