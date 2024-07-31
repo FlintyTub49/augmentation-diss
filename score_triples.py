@@ -115,11 +115,11 @@ def main(method = "spe"):
     combined = list(zip(completions, likelihoods))
     final_sorted = sorted(combined, key = lambda x: x[1], reverse=True)
     
-    with open('text_files/regular_new.txt', 'w') as file:
+    with open('text_files/umls_train.txt', 'w') as file:
         for comp, likelihood in final_sorted:
             file.write(f"{' '.join(comp)} : {likelihood:.4f}\n")
     
-    with open('text_files/regular_final.tsv', 'w') as file:
+    with open('text_files/umls/umls_train.tsv', 'w') as file:
         for comp, _ in final_sorted[:topn]:
             file.write('\t'.join(comp) + '\n')
     
@@ -128,8 +128,8 @@ if __name__ == "__main__":
     device = 'mps'
     model_name = 'gpt2'
     method = 'spe'
-    file_path = 'text_files/check.txt'
-    topn = 999999
+    file_path = 'text_files/umls/train.tsv'
+    topn = 2500
 
     # Load the pre-trained model and tokenizer
     model = AutoModelForCausalLM.from_pretrained(model_name, token=True)
