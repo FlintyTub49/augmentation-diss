@@ -119,7 +119,7 @@ def main(method = "spe"):
         for comp, likelihood in final_sorted:
             file.write(f"{' '.join(comp)} : {likelihood:.4f}\n")
     
-    with open('text_files/nations/nations_train_2500.tsv', 'w') as file:
+    with open('text_files/nations/nations_gpt.tsv', 'w') as file:
         for comp, _ in final_sorted[:topn]:
             file.write('\t'.join(comp) + '\n')
     
@@ -129,7 +129,7 @@ if __name__ == "__main__":
     model_name = 'gpt2'
     method = 'spe'
     file_path = 'text_files/nations/train.txt'
-    topn = 500
+    topn = 2500
 
     # Load the pre-trained model and tokenizer
     model = AutoModelForCausalLM.from_pretrained(model_name, token=True)
