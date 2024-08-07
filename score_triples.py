@@ -52,7 +52,7 @@ def triples_to_prompt(triples, size = 30):
     sampled = [' '.join(i) for i in triples]
     sampled = random.sample(sampled, min(size, len(triples)))
     sampled = '\n'.join(sampled)
-    return sampled
+    return sampled[:1024]
 
 def compute_likelihood_icl(prompt, completion, batch_size=5):
     '''
@@ -90,6 +90,7 @@ def main(method = "spe"):
     
     # Shuffle the available triples and send them as completions
     completions = generate_new_triples(deepcopy(triples))
+    completions = completions[:20000]
     
     # Iterate over the completions
     likelihoods = []
@@ -113,14 +114,13 @@ def main(method = "spe"):
     
     # Sort the triples with highest likelihoods
     combined = list(zip(completions, likelihoods))
-    final_sorted = sorted(combined, key = lambda x: x[1], reverse=True)
     
-    with open('text_files/new_text/nations_train_2500.txt', 'w') as file:
-        for comp, likelihood in final_sorted:
+    with open('text_files/new_text/fb15k_gpt.txt', 'w') as file:
+        for comp, likelihood in combined:
             file.write(f"{' '.join(comp)} : {likelihood:.4f}\n")
     
-    with open('text_files/nations/nations_gpt.tsv', 'w') as file:
-        for comp, _ in final_sorted[:topn]:
+    with open('text_files/fb15k/fb15k_gpt.tsv', 'w') as file:
+        for comp, _ in combined:
             file.write('\t'.join(comp) + '\n')
     
 if __name__ == "__main__":
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     device = 'mps'
     model_name = 'gpt2'
     method = 'spe'
-    file_path = 'text_files/nations/train.txt'
+    file_path = 'text_files/fb15k/train.tsv'
     topn = 2500
 
     # Load the pre-trained model and tokenizer
