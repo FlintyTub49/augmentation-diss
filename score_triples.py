@@ -115,11 +115,11 @@ def main(method = "spe"):
     # Sort the triples with highest likelihoods
     combined = list(zip(completions, likelihoods))
     
-    with open('text_files/new_text/fb15k_gpt.txt', 'w') as file:
+    with open('text_files/new_text/gene_gpt.txt', 'w') as file:
         for comp, likelihood in combined:
             file.write(f"{' '.join(comp)} : {likelihood:.4f}\n")
     
-    with open('text_files/fb15k/fb15k_gpt.tsv', 'w') as file:
+    with open('text_files/gene/gene_gpt.tsv', 'w') as file:
         for comp, _ in combined:
             file.write('\t'.join(comp) + '\n')
     
@@ -128,8 +128,7 @@ if __name__ == "__main__":
     device = 'mps'
     model_name = 'gpt2'
     method = 'spe'
-    file_path = 'text_files/fb15k/train.tsv'
-    topn = 2500
+    file_path = 'text_files/gene/train.tsv'
 
     # Load the pre-trained model and tokenizer
     model = AutoModelForCausalLM.from_pretrained(model_name, token=True)
