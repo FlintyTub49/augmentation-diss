@@ -21,7 +21,7 @@ def read_json(file_path):
 def main(file_path):
     # Read the source triples file and metadata
     triples = read_file(file_path)
-    metadata = read_json('entity2wikidata.json')
+    metadata = read_json('text_files/fb15k/entity2wikidata.json')
     
     # Swap /m IDs with entity labels
     new_triples = []
@@ -38,10 +38,10 @@ def main(file_path):
             new_triples.append('\t'.join(temp))
         
     # Write the labelled triples to a new text file
-    with open('text_files/sample.txt', 'w') as file:
+    with open('text_files/fb15k/test.tsv', 'w') as file:
         file.write('\n'.join(new_triples))
     return
     
 if __name__ == "__main__":
-    file_path = "text_files/fb15k/train.txt"
+    file_path = "text_files/fb15k/test.txt"
     main(file_path)
