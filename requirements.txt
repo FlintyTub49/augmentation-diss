@@ -1,0 +1,7 @@
+typing
+pandas
+numpy
+seaborn
+matplotlib
+torch
+livelossplot
