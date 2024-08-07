@@ -19,13 +19,13 @@ def main(org, aug, sample, model):
     to_add = random.sample(new_add, sample)
     
     final = to_add + original
-    with open(f'text_files/fb15k/fb15k_{sample}_{model}.tsv', 'w') as file:
+    with open(f'text_files/gene/gene_{sample}_{model}.tsv', 'w') as file:
         file.write('\n'.join(final))
         
 if __name__ == "__main__":
-    org = "text_files/fb15k/train.tsv"
+    org = "text_files/gene/train.tsv"
     
     for m in ['gpt', 'gemma']:
-        aug = f"text_files/fb15k/fb15k_{m}.tsv"
+        aug = f"text_files/gene/gene_{m}.tsv"
         for i in [15, 50, 150]:
             main(org, aug, sample = i, model = m)
