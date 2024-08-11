@@ -1,0 +1,11 @@
+Here are the reordered triples with the relationship between two entities:
+
+1. River_Phoenix /people/places_lived/location Atlanta
+2. Do_the_Right_Thing /award/award_honor Golden_Globe_Award_for_Best_Screenplay
+3. Thirteen_Days /film_crew_gig/special_effects_supervisor Cisco_Systems
+4. Sarah_Polley /people/education master_of_arts
+5. James_E._Reilly /award_winner/award Independent_Spirit_Award_for_Best_Male_Lead
+6. The_Godfather_Part_II /people/award_winner Golden_Globe_Award_for_Best_Screenplay
+7. Larry_Niven /award/award_honor Hugo_Award_for_Best_Novelette
+
+Let me know if this is what you were looking for!

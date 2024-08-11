@@ -1,0 +1,14 @@
+Here are 10 new triples that connect existing entities and relations:
+
+1. Golden Globe Award for Best Screenplay - Nominated for Do the Right Thing
+2. Paramount Pictures - Distributed The Godfather Part II
+3. Lauren Holly - Nationality: United States of America (same as Ellen DeGeneres)
+4. Rebecca Romijn - Canoodled with Justin Theroux
+5. Mickey Rourke - Award nominee for Independent Spirit Award for Best Male Lead
+6. William Forsythe - Actor in The Man Who Wasn't There
+7. FC Kryvbas Kryvyi Rih - Midfielder (same as Darlington F.C.)
+8. Speed skating - Athletes from Russia (same as Canada men's national soccer team)
+9. Taxi Driver - BAFTA Award for Best Film Music (same as Bolero)
+10. Billy Elliot - DVD release date (same as The Sessions)
+
+These triples connect existing entities and relations to create new connections, without introducing any new entities or relations.

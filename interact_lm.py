@@ -103,7 +103,7 @@ def main(args):
             
     # Printing the actual input to the model
     instruct = 'exactly follow the prompt provided'
-    final_content = read_file_content("instruct.txt") + '\n' + content
+    final_content = read_file_content("text_files/instruct.txt") + '\n' + content
     print(f'Actual Input: {final_content}\n')
 
     # Send all the input to the model
